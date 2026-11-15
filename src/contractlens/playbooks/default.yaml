@@ -1,0 +1,247 @@
+# ContractLens default review playbook
+# Perspective: the party receiving services / signing a vendor's paper.
+# Copy this file and edit it to encode your own (or your client's) positions.
+#
+# Rule condition types (inside `when`):
+#   any_regex:  list of regexes, rule fires if ANY matches the clause text
+#   all_regex:  list of regexes, rule fires if ALL match
+#   none_regex: list of regexes, rule fires only if NONE match (combine with the others)
+#   duration:   {gt|lt: <days>, pick: max|min}  compares the largest (default) or smallest
+#               "N days/months/years" found in the clause, converted to days
+#   percent:    {gt|lt: <number>, pick: max|min} same for "N%" values
+#
+# required_clauses[].skip_for: contract types (substring match on the detected type)
+#   for which the clause is not expected, e.g. no data-protection clause in an NDA.
+
+name: default-customer-side
+version: 1
+
+preferred:
+  governing_law: ["England and Wales", "New York", "Delaware", "Singapore"]
+
+required_clauses:
+  - type: limitation_of_liability
+    risk: high
+    why: Without a liability cap, your exposure for any breach is unlimited.
+  - type: confidentiality
+    risk: high
+    why: No obligation stops the other side from disclosing your information.
+  - type: termination_for_cause
+    risk: medium
+    why: You need a clear exit if the other side materially breaches.
+  - type: governing_law
+    risk: medium
+    why: Without it, which country's law applies can itself become a dispute.
+  - type: dispute_resolution
+    risk: low
+    why: No agreed forum means disputes can be filed wherever the other side prefers.
+  - type: data_protection
+    risk: medium
+    why: Required whenever personal data is processed under the agreement.
+    skip_for: [NDA, Employment]
+  - type: force_majeure
+    risk: low
+    why: Clarifies what happens when events outside either party's control occur.
+    skip_for: [NDA]
+
+rules:
+  - id: LOL-001
+    title: Unlimited or uncapped liability
+    applies_to: [limitation_of_liability, uncapped_liability, indemnification]
+    risk: critical
+    when:
+      any_regex:
+        - "\\bunlimited liability\\b"
+        - "\\bshall not be (limited|capped)\\b"
+        - "\\bwithout (any )?limit(ation)?\\b"
+    explanation: The clause leaves at least one party's liability uncapped.
+    redline: >-
+      Except for breaches of confidentiality and a party's indemnification obligations,
+      each party's aggregate liability under this Agreement shall not exceed the fees
+      paid or payable in the twelve (12) months preceding the claim.
+
+  - id: LOL-002
+    title: Liability cap only protects the other party
+    applies_to: [limitation_of_liability]
+    risk: high
+    when:
+      any_regex:
+        - "\\b(provider|vendor|supplier|licensor|company)'?s? (total |aggregate )?liability\\b"
+      none_regex:
+        - "\\beach party'?s?\\b"
+        - "\\beither party'?s?\\b"
+        - "\\bneither party\\b"
+    explanation: The cap is written for one side only; your own liability may remain uncapped.
+    redline: Make the limitation mutual ("each party's aggregate liability...").
+
+  - id: LOL-003
+    title: Liability cap set very low
+    applies_to: [limitation_of_liability]
+    risk: medium
+    when:
+      any_regex:
+        - "\\bfees\\b[^.]{0,60}\\b(one|three|six|1|3|6)\\s*(\\(\\d\\)\\s*)?months?\\b"
+        - "\\b(one|three|six|1|3|6)\\s*(\\(\\d\\)\\s*)?months?\\b[^.]{0,40}\\bfees\\b"
+    explanation: The cap looks small relative to the value at risk.
+    redline: Raise the cap to at least the fees paid or payable in the preceding twelve (12) months.
+
+  - id: IND-001
+    title: One-sided indemnity
+    applies_to: [indemnification]
+    risk: high
+    when:
+      any_regex:
+        - "\\b(customer|client|licensee|recipient|you) shall (defend, )?indemnify\\b"
+      none_regex:
+        - "\\beach party shall\\b"
+        - "\\b(provider|vendor|supplier|licensor|company) shall (defend, )?indemnify\\b"
+    explanation: Only your side gives an indemnity; the other party gives none in return.
+    redline: Add a reciprocal indemnity from the other party for IP infringement, gross negligence and wilful misconduct.
+
+  - id: REN-001
+    title: Automatic renewal
+    applies_to: [renewal, term]
+    risk: medium
+    when:
+      any_regex:
+        - "\\bautomatic(ally)? renew"
+        - "\\bauto[- ]?renew"
+        - "\\bshall renew\\b"
+    explanation: The contract renews automatically unless someone remembers to cancel it in time.
+    redline: Require written confirmation for renewal, or send a renewal reminder at least sixty (60) days before expiry.
+
+  - id: REN-002
+    title: Long notice period to stop renewal
+    applies_to: [renewal, term]
+    risk: medium
+    when:
+      any_regex: ["\\bnon-?renew|\\bnot to renew|\\bprior to (the end|expiration)"]
+      duration: {gt: 60}
+    explanation: The window to give notice of non-renewal is longer than 60 days.
+    redline: Reduce the non-renewal notice period to thirty (30) days.
+
+  - id: TFC-001
+    title: Other party can terminate for convenience
+    applies_to: [termination_for_convenience, termination_for_cause]
+    risk: medium
+    when:
+      any_regex:
+        - "\\b(provider|vendor|supplier|licensor|company) may terminate\\b.*\\b(convenience|without cause|any reason)\\b"
+      none_regex:
+        - "\\beither party may terminate\\b[^.]*\\b(convenience|without cause|any reason)\\b"
+    explanation: Only the other party can walk away without cause.
+    redline: Make termination for convenience mutual, with at least ninety (90) days' notice and a pro-rata refund of prepaid fees.
+
+  - id: PAY-001
+    title: Short payment window
+    applies_to: [payment]
+    risk: low
+    when:
+      any_regex: ["\\bwithin|\\bnet\\s?\\d+"]
+      duration: {lt: 30, pick: min}
+    explanation: Invoices are due in under 30 days, which may not fit your payables cycle.
+    redline: Change payment terms to net thirty (30) days from receipt of a valid invoice.
+
+  - id: PAY-002
+    title: High late-payment interest
+    applies_to: [payment]
+    risk: medium
+    when:
+      any_regex: ["\\binterest|\\blate (fee|charge)"]
+      percent: {gt: 1.5}
+    explanation: Late-payment interest is above 1.5% per month.
+    redline: Cap late-payment interest at 1% per month or the statutory rate, whichever is lower.
+
+  - id: PRC-001
+    title: Unilateral price increases
+    applies_to: [price_restrictions, payment]
+    risk: medium
+    when:
+      any_regex:
+        - "\\bmay (increase|adjust|change) (the |its )?(fees|prices?|rates?)\\b"
+      none_regex:
+        - "\\bnot (to )?exceed\\b"
+        - "\\bcpi\\b"
+    explanation: The other party may raise prices without a ceiling.
+    redline: Limit increases to once per year and to the lower of 3% or CPI, with sixty (60) days' written notice.
+
+  - id: IP-001
+    title: Broad IP assignment
+    applies_to: [ip_ownership]
+    risk: high
+    when:
+      any_regex:
+        - "\\bhereby assigns? (to \\w+ )?all (right|rights), title and interest\\b"
+        - "\\bincluding (any )?pre-?existing\\b"
+    explanation: All IP, possibly including pre-existing materials, transfers to the other party.
+    redline: Exclude pre-existing IP and general know-how; grant a licence to pre-existing IP only as needed to use the deliverables.
+
+  - id: NC-001
+    title: Long non-compete
+    applies_to: [non_compete]
+    risk: high
+    when:
+      duration: {gt: 365}
+    explanation: The non-compete lasts more than 12 months, which is restrictive and may be unenforceable in many places.
+    redline: Limit the non-compete to twelve (12) months and to the specific services delivered under this Agreement.
+
+  - id: NC-002
+    title: Non-compete present
+    applies_to: [non_compete]
+    risk: medium
+    when:
+      any_regex: ["."]
+    explanation: Any non-compete restricts future business; confirm its scope, territory and duration.
+    redline: Narrow the restriction to named direct competitors and the agreed territory.
+
+  - id: CONF-001
+    title: Confidentiality ends too soon
+    applies_to: [confidentiality]
+    risk: medium
+    when:
+      any_regex: ["\\b(period|term) of|\\bfor (a period of )?\\w* ?\\(?\\d+\\)? ?(years?|months?)|\\bsurviv"]
+      duration: {lt: 730}
+    explanation: Confidentiality obligations expire in under two years.
+    redline: Extend confidentiality to at least three (3) years after termination, and indefinitely for trade secrets.
+
+  - id: ASG-001
+    title: Other party can assign freely
+    applies_to: [assignment]
+    risk: low
+    when:
+      any_regex:
+        - "\\b(provider|vendor|supplier|licensor|company) may (freely )?assign\\b"
+      none_regex:
+        - "\\bneither party may\\b"
+    explanation: The other party can transfer the contract (for example to a competitor) without your consent.
+    redline: Require prior written consent for assignment, except to a successor in a merger with notice.
+
+  - id: WAR-001
+    title: All warranties disclaimed
+    applies_to: [warranty]
+    risk: medium
+    when:
+      any_regex:
+        - "\\bas is\\b"
+        - "\\bdisclaims? all warranties\\b"
+    explanation: Services or products are provided "as is" with no promise they will work.
+    redline: Add a warranty that services will be performed in a professional manner and materially conform to the documentation for ninety (90) days.
+
+  - id: DSP-001
+    title: Exclusive jurisdiction far from you
+    applies_to: [dispute_resolution, governing_law]
+    risk: low
+    when:
+      any_regex: ["\\bexclusive jurisdiction\\b"]
+    explanation: All disputes must be brought in one forum chosen by the drafter; check whether it is practical for you.
+    redline: Use the defendant's home courts, or neutral arbitration (e.g. ICC or SIAC) with online hearings.
+
+  - id: DP-001
+    title: No security incident notification deadline
+    applies_to: [data_protection]
+    risk: medium
+    when:
+      any_regex: ["\\bpersonal data|\\bdata protection|\\bsecurity"]
+      none_regex: ["\\bnotify\\b.*\\b(\\d+|twenty-four|forty-eight|seventy-two)\\b.*\\bhours\\b", "\\bwithout undue delay\\b"]
+    explanation: The clause does not say how quickly a data breach must be reported.
+    redline: Require notice of any security incident affecting your data without undue delay and in any case within seventy-two (72) hours.

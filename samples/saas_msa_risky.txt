@@ -1,0 +1,33 @@
+MASTER SERVICES AND SOFTWARE AS A SERVICE AGREEMENT
+
+This Master Services and Software as a Service Agreement (the "Agreement") is made effective as of March 1, 2026 by and between Northwind Cloud Systems Ltd., a company incorporated in Ontario ("Provider"), and Brightline Retail Inc., a Delaware corporation ("Customer"). Provider and Customer are each a "Party" and collectively the "Parties".
+
+1. Definitions. "Services" means the hosted inventory forecasting platform and related support described in an Order Form. "Customer Data" means all data, including personal data, uploaded by Customer to the Services. "Deliverables" means any reports, models, configurations or materials created by Provider in performing the Services.
+
+2. Term. The initial term of this Agreement shall be thirty-six (36) months from the Effective Date. Thereafter this Agreement shall automatically renew for successive twelve (12) month renewal terms unless Customer gives written notice of non-renewal at least one hundred twenty (120) days prior to the end of the then-current term.
+
+3. Fees and Payment. Customer shall pay all fees stated in the Order Form. Provider will invoice Customer monthly in advance and invoices are due within fifteen (15) days of the invoice date. Overdue amounts accrue interest at 2.5% per month. Provider may increase the fees at any time upon thirty (30) days' notice to Customer.
+
+4. Confidentiality. Each Party shall hold the other Party's Confidential Information in confidence and shall not disclose it to any third party except to its employees and contractors who need to know it. These obligations shall survive for a period of one (1) year following termination of this Agreement.
+
+5. Intellectual Property. Provider retains all right, title and interest in the Services. Customer hereby assigns to Provider all right, title and interest in any feedback, suggestions and improvements, including any pre-existing materials Customer provides to configure the Services. Provider grants Customer a non-exclusive, non-transferable licence to use the Deliverables during the Term.
+
+6. Warranties. THE SERVICES ARE PROVIDED "AS IS" AND PROVIDER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+7. Indemnification. Customer shall defend, indemnify and hold harmless Provider and its affiliates from and against any and all claims, losses, damages and expenses arising out of Customer's use of the Services or Customer Data.
+
+8. Limitation of Liability. IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY ARISING OUT OF THIS AGREEMENT EXCEED THE FEES PAID BY CUSTOMER IN THE THREE (3) MONTHS PRECEDING THE CLAIM. PROVIDER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF DATA. Customer's liability for breach of Sections 3 and 7 shall not be limited.
+
+9. Termination. Provider may terminate this Agreement for convenience at any time upon thirty (30) days' written notice. Either Party may terminate this Agreement upon written notice if the other Party commits a material breach that remains uncured thirty (30) days after notice.
+
+10. Non-Solicitation and Non-Compete. During the Term and for twenty-four (24) months thereafter, Customer shall not, directly or indirectly, engage any business that competes with the Services, and shall not solicit or hire any Provider personnel.
+
+11. Data Protection. Provider will implement reasonable security measures to protect Customer Data and will process personal data in accordance with applicable privacy law.
+
+12. Assignment. Provider may assign this Agreement without Customer's consent. Customer may not assign this Agreement without Provider's prior written consent.
+
+13. Governing Law and Disputes. This Agreement shall be governed by the laws of the Province of Ontario, without regard to its conflict of laws rules. The courts of Toronto, Ontario shall have exclusive jurisdiction over any dispute arising out of this Agreement.
+
+14. Notices. All notices shall be given in writing and delivered by email to the addresses in the Order Form.
+
+15. Entire Agreement. This Agreement, together with each Order Form, constitutes the entire agreement between the Parties and supersedes all prior agreements and understandings.

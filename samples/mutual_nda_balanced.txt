@@ -1,0 +1,23 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement (the "Agreement") is entered into on June 10, 2026 by and between Harbor Analytics LLC, a New York limited liability company ("Harbor"), and Quill & Co. Design Ltd., a company registered in England and Wales ("Quill").
+
+1. Purpose. The parties wish to evaluate a potential collaboration on a data visualisation product (the "Purpose") and may disclose Confidential Information to each other for that Purpose.
+
+2. Confidential Information. "Confidential Information" means all non-public business, technical and financial information disclosed by one party to the other, whether orally or in writing, that is marked confidential or would reasonably be understood to be confidential. It does not include information that is or becomes public through no fault of the recipient, was already known to the recipient, or is independently developed.
+
+3. Obligations. The recipient shall use Confidential Information only for the Purpose, protect it with at least reasonable care, and disclose it only to employees and advisers who need to know it and are bound by similar obligations. These obligations continue for three (3) years after the last disclosure, and for trade secrets for as long as they remain trade secrets.
+
+4. Return of Materials. On written request, the recipient shall promptly return or destroy all Confidential Information and confirm this in writing within ten (10) days.
+
+5. No Licence. Nothing in this Agreement grants either party any licence or rights in the other party's intellectual property, except the limited right to use Confidential Information for the Purpose.
+
+6. Term and Termination. This Agreement starts on the date above and continues for two (2) years. Either party may terminate it on thirty (30) days' written notice. Termination does not affect obligations regarding Confidential Information already disclosed.
+
+7. Remedies. Each party acknowledges that unauthorised disclosure may cause irreparable harm and that the disclosing party may seek injunctive relief in addition to any other remedy.
+
+8. Limitation of Liability. Neither party shall be liable for indirect or consequential damages arising out of this Agreement, except for breach of Section 3. Each party's aggregate liability under this Agreement shall not exceed USD 250,000.
+
+9. Governing Law. This Agreement shall be governed by the laws of England and Wales. Any dispute shall first be referred to mediation and, failing settlement within thirty (30) days, finally resolved by arbitration under the LCIA Rules seated in London.
+
+10. Entire Agreement. This Agreement constitutes the entire agreement between the parties regarding its subject matter and supersedes all prior discussions.

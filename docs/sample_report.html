@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contract review · saas_msa_risky.txt</title>
+<style>
+:root{--ink:#1d2433;--muted:#5c667a;--line:#e3e6ec;--bg:#f7f8fa}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:980px;margin:0 auto;padding:32px 20px 60px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:32px 0 12px}h3{font-size:16px;margin:0}
+.top{display:grid;grid-template-columns:1fr 180px;gap:20px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.gauge{text-align:center}.gauge b{display:block;font-size:44px;color:#b42318;line-height:1}
+.gauge span{text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:#b42318;font-weight:700}
+dl{display:grid;grid-template-columns:140px 1fr;gap:4px 12px;margin:12px 0 0}dt{color:var(--muted)}dd{margin:0}
+.chip{display:inline-block;margin:10px 6px 0 0;padding:2px 10px;border-radius:99px;border:1px solid var(--c);color:var(--c);font-size:13px;font-weight:600}
+.finding{background:#fff;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:10px;padding:14px 18px;margin:0 0 12px}
+.finding header{display:flex;gap:10px;align-items:center}
+.badge{background:var(--c);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:6px;font-weight:700}
+.meta{color:var(--muted);font-size:13px;margin:4px 0 8px}
+blockquote{margin:8px 0;padding:8px 12px;background:var(--bg);border-left:3px solid var(--line);font-family:ui-serif,Georgia,serif;color:#333}
+.redline{background:#eef6ee;border-radius:8px;padding:8px 12px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+td{padding:7px 10px;border-top:1px solid var(--line);font-size:14px}code{font-size:12px;color:var(--muted)}
+footer{margin-top:36px;color:var(--muted);font-size:13px}
+@media(max-width:640px){.top{grid-template-columns:1fr}dl{grid-template-columns:1fr}}
+</style></head><body><main>
+<section class="top">
+  <div>
+    <h1>saas_msa_risky.txt</h1>
+    <div class="meta">Provider: offline · Playbook: default-customer-side · 16 clauses</div>
+    <dl>
+      <dt>Type</dt><dd>SaaS Subscription Agreement</dd>
+      <dt>Parties</dt><dd>Northwind Cloud Systems Ltd., Brightline Retail Inc.</dd>
+      <dt>Effective date</dt><dd>March 1, 2026</dd>
+      <dt>Term</dt><dd>thirty-six (36) months</dd>
+      <dt>Governing law</dt><dd>Province of Ontario</dd>
+    </dl>
+    <span class="chip" style="--c:#b42318">1 critical</span><span class="chip" style="--c:#d9480f">4 high</span><span class="chip" style="--c:#b08800">10 medium</span><span class="chip" style="--c:#3b7d3b">5 low</span>
+  </div>
+  <div class="gauge"><b>94</b><span>critical risk</span></div>
+</section>
+<h2>Findings (20)</h2>
+
+<article class="finding" style="--c:#b42318">
+  <header><span class="badge">critical</span><h3>Unlimited or uncapped liability</h3></header>
+  <p class="meta">Limitation of Liability · Limitation of Liability · <code>LOL-001</code> · rules</p>
+  <p>The clause leaves at least one party&#x27;s liability uncapped.</p>
+  <blockquote>…Customer&#x27;s liability for breach of Sections 3 and 7 shall not be limited.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Except for breaches of confidentiality and a party&#x27;s indemnification obligations, each party&#x27;s aggregate liability under this Agreement shall not exceed the fees paid or payable in the twelve (12) months preceding the claim.</p>
+</article>
+<article class="finding" style="--c:#d9480f">
+  <header><span class="badge">high</span><h3>Broad IP assignment</h3></header>
+  <p class="meta">Intellectual Property · IP Ownership / Assignment · <code>IP-001</code> · rules</p>
+  <p>All IP, possibly including pre-existing materials, transfers to the other party.</p>
+  <blockquote>…Customer hereby assigns to Provider all right, title and interest in any feedback, suggestions and improvements, including any pre-existing materials Customer provides to configure…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Exclude pre-existing IP and general know-how; grant a licence to pre-existing IP only as needed to use the deliverables.</p>
+</article>
+<article class="finding" style="--c:#d9480f">
+  <header><span class="badge">high</span><h3>One-sided indemnity</h3></header>
+  <p class="meta">Indemnification · Indemnification · <code>IND-001</code> · rules</p>
+  <p>Only your side gives an indemnity; the other party gives none in return.</p>
+  <blockquote>…Customer shall defend, indemnify and hold harmless Provider and its affiliates from and against any and all claims, losses, damages and expenses…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Add a reciprocal indemnity from the other party for IP infringement, gross negligence and wilful misconduct.</p>
+</article>
+<article class="finding" style="--c:#d9480f">
+  <header><span class="badge">high</span><h3>Liability cap only protects the other party</h3></header>
+  <p class="meta">Limitation of Liability · Limitation of Liability · <code>LOL-002</code> · rules</p>
+  <p>The cap is written for one side only; your own liability may remain uncapped.</p>
+  <blockquote>…IN NO EVENT SHALL PROVIDER&#x27;S AGGREGATE LIABILITY ARISING OUT OF THIS AGREEMENT EXCEED THE FEES PAID BY CUSTOMER IN THE THREE (3) MONTHS PRECEDING THE CLAIM. PROVIDER…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Make the limitation mutual (&quot;each party&#x27;s aggregate liability...&quot;).</p>
+</article>
+<article class="finding" style="--c:#d9480f">
+  <header><span class="badge">high</span><h3>Long non-compete</h3></header>
+  <p class="meta">Non-Solicitation and Non-Compete · Non-Compete · <code>NC-001</code> · rules</p>
+  <p>The non-compete lasts more than 12 months, which is restrictive and may be unenforceable in many places.</p>
+  <blockquote>10. Non-Solicitation and Non-Compete. During the Term and for twenty-four (24) months thereafter, Customer shall not, directly or indirectly, engage any business that competes with the Services, and shall not solicit or…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Limit the non-compete to twelve (12) months and to the specific services delivered under this Agreement.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Automatic renewal</h3></header>
+  <p class="meta">Term · Renewal · <code>REN-001</code> · rules</p>
+  <p>The contract renews automatically unless someone remembers to cancel it in time.</p>
+  <blockquote>…Thereafter this Agreement shall automatically renew for successive twelve (12) month renewal terms unless Customer gives written notice of non-renewal at least one…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Require written confirmation for renewal, or send a renewal reminder at least sixty (60) days before expiry.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Long notice period to stop renewal</h3></header>
+  <p class="meta">Term · Renewal · <code>REN-002</code> · rules</p>
+  <p>The window to give notice of non-renewal is longer than 60 days.</p>
+  <blockquote>…Thereafter this Agreement shall automatically renew for successive twelve (12) month renewal terms unless Customer gives written notice of non-renewal at least one hundred twenty (120) days prior to the end of the then-current term.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Reduce the non-renewal notice period to thirty (30) days.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>High late-payment interest</h3></header>
+  <p class="meta">Fees and Payment · Payment Terms · <code>PAY-002</code> · rules</p>
+  <p>Late-payment interest is above 1.5% per month.</p>
+  <blockquote>…Overdue amounts accrue interest at 2.5% per month. Provider may increase the fees at any time upon thirty (30) days&#x27; notice to Customer.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Cap late-payment interest at 1% per month or the statutory rate, whichever is lower.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Unilateral price increases</h3></header>
+  <p class="meta">Fees and Payment · Payment Terms · <code>PRC-001</code> · rules</p>
+  <p>The other party may raise prices without a ceiling.</p>
+  <blockquote>…Provider may increase the fees at any time upon thirty (30) days&#x27; notice to Customer.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Limit increases to once per year and to the lower of 3% or CPI, with sixty (60) days&#x27; written notice.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Confidentiality ends too soon</h3></header>
+  <p class="meta">Confidentiality · Confidentiality · <code>CONF-001</code> · rules</p>
+  <p>Confidentiality obligations expire in under two years.</p>
+  <blockquote>…These obligations shall survive for a period of one (1) year following termination of this Agreement.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Extend confidentiality to at least three (3) years after termination, and indefinitely for trade secrets.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>All warranties disclaimed</h3></header>
+  <p class="meta">Warranties · Warranties · <code>WAR-001</code> · rules</p>
+  <p>Services or products are provided &quot;as is&quot; with no promise they will work.</p>
+  <blockquote>…THE SERVICES ARE PROVIDED &quot;AS IS&quot; AND PROVIDER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF MERCHANTABILITY OR FITNESS…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Add a warranty that services will be performed in a professional manner and materially conform to the documentation for ninety (90) days.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Liability cap set very low</h3></header>
+  <p class="meta">Limitation of Liability · Limitation of Liability · <code>LOL-003</code> · rules</p>
+  <p>The cap looks small relative to the value at risk.</p>
+  <blockquote>…IN NO EVENT SHALL PROVIDER&#x27;S AGGREGATE LIABILITY ARISING OUT OF THIS AGREEMENT EXCEED THE FEES PAID BY CUSTOMER IN THE THREE (3) MONTHS PRECEDING THE CLAIM. PROVIDER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL OR CONSEQUENTIAL DAMAGES, INCLUDING…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Raise the cap to at least the fees paid or payable in the preceding twelve (12) months.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Other party can terminate for convenience</h3></header>
+  <p class="meta">Termination · Termination for Convenience · <code>TFC-001</code> · rules</p>
+  <p>Only the other party can walk away without cause.</p>
+  <blockquote>…Provider may terminate this Agreement for convenience at any time upon thirty (30) days&#x27; written notice. Either Party may terminate this Agreement upon written notice…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Make termination for convenience mutual, with at least ninety (90) days&#x27; notice and a pro-rata refund of prepaid fees.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>Non-compete present</h3></header>
+  <p class="meta">Non-Solicitation and Non-Compete · Non-Compete · <code>NC-002</code> · rules</p>
+  <p>Any non-compete restricts future business; confirm its scope, territory and duration.</p>
+  <blockquote>10. Non-Solicitation and Non-Compete. During the Term and for twenty-four (24) months thereafter, Customer shall not, directly or indirectly, engage any business that competes with the Services, and shall not solicit or…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Narrow the restriction to named direct competitors and the agreed territory.</p>
+</article>
+<article class="finding" style="--c:#b08800">
+  <header><span class="badge">medium</span><h3>No security incident notification deadline</h3></header>
+  <p class="meta">Data Protection · Data Protection · <code>DP-001</code> · rules</p>
+  <p>The clause does not say how quickly a data breach must be reported.</p>
+  <blockquote>…Data Protection. Provider will implement reasonable security measures to protect Customer Data and will process personal data…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Require notice of any security incident affecting your data without undue delay and in any case within seventy-two (72) hours.</p>
+</article>
+<article class="finding" style="--c:#3b7d3b">
+  <header><span class="badge">low</span><h3>Short payment window</h3></header>
+  <p class="meta">Fees and Payment · Payment Terms · <code>PAY-001</code> · rules</p>
+  <p>Invoices are due in under 30 days, which may not fit your payables cycle.</p>
+  <blockquote>…Provider will invoice Customer monthly in advance and invoices are due within fifteen (15) days of the invoice date. Overdue amounts accrue interest at 2.5% per month. Provider may increase…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Change payment terms to net thirty (30) days from receipt of a valid invoice.</p>
+</article>
+<article class="finding" style="--c:#3b7d3b">
+  <header><span class="badge">low</span><h3>Other party can assign freely</h3></header>
+  <p class="meta">Assignment · Assignment · <code>ASG-001</code> · rules</p>
+  <p>The other party can transfer the contract (for example to a competitor) without your consent.</p>
+  <blockquote>…Provider may assign this Agreement without Customer&#x27;s consent. Customer may not assign this Agreement without Provider&#x27;s prior written…</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Require prior written consent for assignment, except to a successor in a merger with notice.</p>
+</article>
+<article class="finding" style="--c:#3b7d3b">
+  <header><span class="badge">low</span><h3>Exclusive jurisdiction far from you</h3></header>
+  <p class="meta">Governing Law and Disputes · Dispute Resolution · <code>DSP-001</code> · rules</p>
+  <p>All disputes must be brought in one forum chosen by the drafter; check whether it is practical for you.</p>
+  <blockquote>…The courts of Toronto, Ontario shall have exclusive jurisdiction over any dispute arising out of this Agreement.</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Use the defendant&#x27;s home courts, or neutral arbitration (e.g. ICC or SIAC) with online hearings.</p>
+</article>
+<article class="finding" style="--c:#3b7d3b">
+  <header><span class="badge">low</span><h3>Governing law not on preferred list</h3></header>
+  <p class="meta">Governing Law and Disputes · Governing Law · <code>GL-001</code> · rules</p>
+  <p>Governed by the laws of Province of Ontario; preferred: England and Wales, New York, Delaware, Singapore.</p>
+  <blockquote>laws of the Province of Ontario</blockquote>
+  <p class="redline"><strong>Suggested redline:</strong> Propose the laws of England and Wales.</p>
+</article>
+<article class="finding" style="--c:#3b7d3b">
+  <header><span class="badge">low</span><h3>Missing clause: Force Majeure</h3></header>
+  <p class="meta">Whole contract · Force Majeure · <code>MISSING-force_majeure</code> · rules</p>
+  <p>Clarifies what happens when events outside either party&#x27;s control occur.</p>
+  
+  
+</article>
+<h2>Clause map</h2>
+<table><tr><td><code>c000</code></td><td>MASTER SERVICES AND SOFTWARE AS A SERVICE AGREEMENT</td><td>Parties</td><td></td></tr><tr><td><code>c001</code></td><td>Definitions</td><td>Definitions</td><td></td></tr><tr><td><code>c002</code></td><td>Term</td><td>Term / Duration, Renewal</td><td>⚑ 2</td></tr><tr><td><code>c003</code></td><td>Fees and Payment</td><td>Payment Terms</td><td>⚑ 3</td></tr><tr><td><code>c004</code></td><td>Confidentiality</td><td>Confidentiality</td><td>⚑ 1</td></tr><tr><td><code>c005</code></td><td>Intellectual Property</td><td>IP Ownership / Assignment</td><td>⚑ 1</td></tr><tr><td><code>c006</code></td><td>Warranties</td><td>Warranties</td><td>⚑ 1</td></tr><tr><td><code>c007</code></td><td>Indemnification</td><td>Indemnification</td><td>⚑ 1</td></tr><tr><td><code>c008</code></td><td>Limitation of Liability</td><td>Limitation of Liability</td><td>⚑ 3</td></tr><tr><td><code>c009</code></td><td>Termination</td><td>Termination for Cause, Termination for Convenience</td><td>⚑ 1</td></tr><tr><td><code>c010</code></td><td>Non-Solicitation and Non-Compete</td><td>Non-Solicitation, Non-Compete</td><td>⚑ 2</td></tr><tr><td><code>c011</code></td><td>Data Protection</td><td>Data Protection</td><td>⚑ 1</td></tr><tr><td><code>c012</code></td><td>Assignment</td><td>Assignment</td><td>⚑ 1</td></tr><tr><td><code>c013</code></td><td>Governing Law and Disputes</td><td>Governing Law, Dispute Resolution</td><td>⚑ 2</td></tr><tr><td><code>c014</code></td><td>Notices</td><td>Notices</td><td></td></tr><tr><td><code>c015</code></td><td>Entire Agreement</td><td>Entire Agreement</td><td></td></tr></table>
+<footer>Automated first-pass review. Not legal advice: have a qualified lawyer confirm every finding before relying on it. Generated by ContractLens.</footer>
+</main></body></html>
